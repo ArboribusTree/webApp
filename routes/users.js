@@ -4,8 +4,20 @@ const User = require('../models/user')
 
 
 
-router.get('/', (req, res) => {
-    res.render('users/index')
+router.get('/', async (req, res) => {
+    let searchOptions = {}
+    if (req.query.username != null && req.query.username !== ' '){
+        searchOptions.username = new RegExp(req.query.username, 'i')
+    }
+    try{
+        const users = await User.find(searchOptions)
+        res.render('users/index', {
+            users: users,
+            searchOptions: req.query
+        })
+    } catch{
+        res.redirect('/')
+    }
 
 })
 
@@ -16,17 +28,20 @@ router.get('/new', (req, res) => {
 
 router.post('/', async (req, res) => {
     const user = new User({
-      name: req.body.name
-    })
-    try{
+        username: req.body.username,
+        password: req.body.password
+      })
+      try {
         const newUser = await user.save()
+        console.log("create success")
+        // res.redirect(`users/${newUser.id}`)
         res.redirect(`users`)
-    } catch{
+      } catch {
         res.render('users/new', {
-            user: user,
-            errorMessage: 'Error creating User'
+          user: user,
+          errorMessage: 'Error creating User'
         })
-    }
-  })
+      }
+})
 
 module.exports = router
