@@ -24,10 +24,12 @@ db.once('open', () => console.log('Connected to Mongoose'))
 
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/users')
+const profileRouter = require('./routes/profiles')
+
 
 app.use('/', indexRouter)
 app.use('/users', userRouter)
-
+app.use('/profiles', profileRouter)
 
 app.listen(port)
 console.log('Listening to port: ' + port)
