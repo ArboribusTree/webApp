@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//subject to change
 const userSchema = new mongoose.Schema({
     profileDescription: String,
     followingGames: [String],

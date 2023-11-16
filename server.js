@@ -12,15 +12,14 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
 
-app.set('view engine', "ejs")
+app.set('view engine', "ejs")                                                   
 app.set('views', __dirname + "/views")
 app.set('layout', 'layouts/layout.ejs')
 app.use(expressLayouts)
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
-app.use(cookieParser())
-app.use(express.json())
-app.use(session({
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))                    //used for retrieving information from body
+app.use(cookieParser())                                                             //used for parsing cookies
+app.use(session({                                                                   //used for creating a session
     secret: 'ThisIsASecret',
     resave: false,
     saveUninitialized: false
@@ -32,11 +31,12 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
+//routes
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
 
-
+//initializing routes
 app.use('/', indexRouter)
 app.use('/users', userRouter)
 app.use('/profiles', profileRouter)
