@@ -96,7 +96,7 @@ router.post('/signup', async (req, res) => {
       //saves user credentials into database
       //await is used to execute .save()
       await user.save()
-      res.redirect('/login')
+      res.redirect('./login')
     } catch {
       //error condition will only be if a username already exists
       //this is because username in schema is set to be unique

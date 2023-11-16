@@ -10,6 +10,7 @@ const mongoose = require("mongoose")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const passport = require('passport')
 
 
 app.set('view engine', "ejs")                                                   
@@ -31,15 +32,20 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
+app.use(passport.initialize())
+app.use(passport.session())
+
 //routes
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
+const postRouter = require('./routes/post')
 
 //initializing routes
 app.use('/', indexRouter)
 app.use('/users', userRouter)
 app.use('/profiles', profileRouter)
+app.use('/posts', postRouter)
 
 app.listen(port)
 console.log('Listening to port: ' + port)
