@@ -8,6 +8,9 @@ const expressLayouts = require('express-ejs-layouts')
 const port = 3000
 const mongoose = require("mongoose")
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
 
 app.set('view engine', "ejs")
 app.set('views', __dirname + "/views")
@@ -15,6 +18,13 @@ app.set('layout', 'layouts/layout.ejs')
 app.use(expressLayouts)
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
+app.use(cookieParser())
+app.use(express.json())
+app.use(session({
+    secret: 'ThisIsASecret',
+    resave: false,
+    saveUninitialized: false
+}))
 
 console.log("this is the url" + process.env.DATABASE_URL)
 mongoose.connect(process.env.DATABASE_URL)

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
+const { hashPassword, comparePassword } = require('../controllers/hasher');
 
 //route to login page
 router.get('/login',  (req, res) => {
@@ -9,23 +10,45 @@ router.get('/login',  (req, res) => {
 
 
 
+
+
 //login flag??
 router.post('/login', async (req, res) => {
-  const user = User({
-    username: req.body.username,
-    password: req.body.password
-  })
+  
+    const {username, password} = req.body
+    
+    if(!username || !password){
+      return res.render('users/login', {
+        username: user.username, 
+        password: user.password,
+        errorMessage: 'Invalid Login'
+      })
+    } 
 
-  const userCredentials = await User.findOne({username: user.username}).exec()
-  console.log(userCredentials)
-  try{
-    if(userCredentials.username === user.username && userCredentials.password === user.password){
-      res.redirect('/users')
+    const user = await User.findOne({username})
+
+    if (!user){
+      return res.render('users/login', {
+        username: user.username, 
+        password: user.password,
+        errorMessage: 'Invalid Login'
+      })
     }
-  } catch{
-    errorMessage: 'Invalid login credentials'
-    res.render('users/login', {user: user})
-  }
+    console.log("this is password: " + password)
+    console.log("this is user.password: " + user)
+    const isValid = comparePassword(password, user.password)
+    if(isValid){
+      console.log("Auth success")
+      req.session.user = user
+      return res.render('users/index', {user: user})
+    } else {
+      console.log("Auth denied")
+      return res.render('users/login', {
+        user: user,
+        errorMessage: 'Invalid Login'
+      })
+    }
+
 
   
 })
@@ -34,19 +57,12 @@ router.post('/login', async (req, res) => {
 //route to users/index.ejs
 //search users
 router.get('/', async (req, res) => {
-    let searchOptions = {}
-    if (req.query.username != null && req.query.username !== ' '){
-        searchOptions.username = new RegExp(req.query.username)
-    }
-    try{
-        const users = await User.find(searchOptions)
-        res.render('users/index', {
-            users: users,
-            searchOptions: req.query
-        })
-    } catch{
-        res.redirect('/')
-    }
+  try{
+  console.log(req.session.user.username)
+  } catch {
+    
+  }
+    res.render('users/index')
 
 })
 
@@ -58,35 +74,49 @@ router.get('/signup', (req, res) => {
 
 //create user and insert in mongoDB
 router.post('/signup', async (req, res) => {
-    //instantiating new user object based on userSchema
     const user = new User({
-        username: req.body.username,
-        password: req.body.password
+      username: req.body.username,
+      password: req.body.password
+    })
+    if(!user.username || !user.password){
+      user.password = ""
+      return res.render('users/signup', {
+        user: user,
+        errorMessage: "Incomplete Credentials"
       })
-      try {
-        console.log('users: ' + user)
-        if(await User.countDocuments({username: req.body.username}, {limit: 1}).exec() === 0){
-        //save user in the database
-        const newUser = await user.save()
-        console.log("create success")
-        // res.redirect(`users/${newUser.id}`)
-        res.redirect('/users')
-        } else{
-          res.render('users/signup', {
-            user: user,
-            errorMessage: 'Username already exists'
-          })
-        }
-      } catch {
-        res.render('users/signup', {
-          user: user,
-          errorMessage: 'Error creating User'
-        })
-      }
+    }
+    try{
+      const hashedPassword = hashPassword(user.password)
+      user.password = hashedPassword
+      console.log('This is hashed password: ' + user.password)
+      await user.save()
+      res.redirect('/login')
+    } catch {
+      user.password = ""
+      res.render('users/signup', {
+        user: user,
+        errorMessage: 'Username already exists'
+      })
+    }
 })
 
 
+//for searching
 
 
+// let searchOptions = {}
+//     console.log(req.cookies)
+//     if (req.query.username != null && req.query.username !== ' '){
+//         searchOptions.username = new RegExp(req.query.username)
+//     }
+//     try{
+//         const users = await User.find(searchOptions)
+//         res.render('users/index', {
+//             users: users,
+//             searchOptions: req.query
+//         })
+//     } catch{
+//         res.redirect('/')
+//     }
 
 module.exports = router
