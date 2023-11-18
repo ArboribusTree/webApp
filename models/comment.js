@@ -7,6 +7,10 @@ const commentSchema = new mongoose.Schema({
         type: Date,
         immutable: true,
         default: Date.now(),
+    },
+    postId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 })
 

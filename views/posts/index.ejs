@@ -1,7 +1,15 @@
 <h2>forum</h2>
 <form action="/posts" method="GET">
-    <label>Name</label>
-    <input type="text" name="username" value="<%= searchOptions.username %>">
-    <button type="submit">Search</button>
+    <label>Forum</label>
 </form>
+<br>
+<% posts.forEach(post => {%>
+    <div><a href="/posts/<%=post.id%>"><%=post.title%></a></div>
+    <div><%=post.author%></div>
+    <div><%=post.postDescription%></div>
+    <div><%=post.game%></div>
+    <div><%=post.upvote%></div>
+    <div><img height="150" width = "100" src="<%= post.postImagePath %>"</div>
+    <br>
+<%}); %>
 

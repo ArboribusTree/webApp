@@ -1,0 +1,31 @@
+<h2>Posts</h2>
+
+<div><%= post.title %></div>
+<div><%= post.author %></div>
+<div><%= post.postDescription %></div>
+<div><%= post.game %></div>
+<div><%= post.upvote %></div>
+<div><img height="150" width="100" src="<%= post.postImagePath %>"></div>
+
+<br>
+<br>
+<form action="./createComments" method="POST">
+    <textarea name="comment">Comment</textarea>
+    <button type="submit">Create</button>
+</form>
+<br>
+
+<% if (post.comments && post.comments.length > 0) { %>
+    <% post.comments.forEach(comment => { %>
+        <div><%= comment.author %></div>
+        <div><%= comment.commentDescription %></div>
+        <div><%= comment.createdAt.toLocaleDateString("en-US", { 
+            month: 'long', 
+            day: 'numeric', 
+            year: 'numeric' 
+            }) %></div>
+        <div>----------------------</div>
+    <% }) %>
+<% } else { %>
+    <p>No comments available.</p>
+<% } %>

@@ -1,1 +1,11 @@
-users
+<h2>Search Users</h2>
+<form action="/users" method="GET">
+  <label>Name</label>
+</form>
+<br>
+<% //console.log(users) %>
+<% users.forEach(user => { %>
+    <% console.log(user.username) %>
+  <div><%= user.username %></div>
+  <a href="/users/<%=user.id%>">View</a>
+<% }) %>

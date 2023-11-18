@@ -1,17 +1,25 @@
 const mongoose = require('mongoose')
 const Comment = require('./comment')
-const postImagePath = 'uploads/postImages'
+const path = require('path')
+const uploadPath = 'uploads/postImages'
 //idk what to do with downvotes
 
 const postSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     author: String,
-    postDescription: String,
+    postDescription: {
+        type: String,
+        required: true
+    },
     game: String,
     upvote: Number,
     comments: {
         type: [mongoose.Schema.Types.ObjectId],
-        default: null
+        ref: 'Comment',
+        default: []
     },
     createdAt: {
         type: Date,
@@ -20,10 +28,13 @@ const postSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        // required: true
+        required: true
     }
 })
 
+postSchema.virtual('postImagePath').get(function() {
+    return this.image ? path.join('/', uploadPath, this.image) : null;
+});
 
 module.exports = mongoose.model('Post', postSchema)
-module.exports.postImagePath = postImagePath
+module.exports.uploadPath = uploadPath

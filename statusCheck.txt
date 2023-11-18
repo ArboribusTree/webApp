@@ -1,3 +1,11 @@
-user authentication is fully completed. Comments will be done next followed by posts.
+done:
+user login/signup
+forum
+view posts
+create posts
+comments
 
-development will proceed til i pass out XP
+todo:
+game page
+profile page
+home page

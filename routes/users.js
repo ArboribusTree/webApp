@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
       console.log("Auth success")
       //this creates a session if user successfully logs in
       req.session.user = user
-      return res.render('users/index', {user: user})
+      return res.redirect('/users')
     } else {
       //just a console logger
       console.log("Auth denied")
@@ -58,12 +58,16 @@ router.post('/login', async (req, res) => {
 
 //route to users/index.ejs
 router.get('/', async (req, res) => {
-  try{
-  console.log(req.session.user.username)
-  } catch {
 
-  }
-    res.render('users/index')
+    try{
+        const users = await User.find({})
+        console.log(users)
+        res.render('users/index', {
+            users: users
+        })
+    } catch{
+        res.redirect('/')
+    }
 
 })
 
@@ -111,23 +115,11 @@ router.post('/signup', async (req, res) => {
     }
 })
 
+router.get('/:id', (req, res) => {
+  res.send('id: ' + req.params.id)
+})
 
-//for searching
 
 
-// let searchOptions = {}
-//     console.log(req.cookies)
-//     if (req.query.username != null && req.query.username !== ' '){
-//         searchOptions.username = new RegExp(req.query.username)
-//     }
-//     try{
-//         const users = await User.find(searchOptions)
-//         res.render('users/index', {
-//             users: users,
-//             searchOptions: req.query
-//         })
-//     } catch{
-//         res.redirect('/')
-//     }
 
 module.exports = router
