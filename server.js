@@ -10,6 +10,8 @@ const mongoose = require("mongoose")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const methodOverride = require('method-override')
+const setLoginStatus = require('./middleware/setLoginStatus.js')
 const passport = require('passport')
 
 
@@ -25,6 +27,8 @@ app.use(session({                                                               
     resave: false,
     saveUninitialized: false
 }))
+app.use(methodOverride('_method'))
+app.use(setLoginStatus)
 
 console.log("this is the url" + process.env.DATABASE_URL)
 mongoose.connect(process.env.DATABASE_URL)
@@ -40,12 +44,31 @@ const indexRouter = require('./routes/index')
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
 const postRouter = require('./routes/post')
+const gameRouter = require('./routes/games')
 
 //initializing routes
 app.use('/', indexRouter)
 app.use('/users', userRouter)
 app.use('/profiles', profileRouter)
 app.use('/posts', postRouter)
+app.use('/games', gameRouter)
+
+//uncomment this if running for the first time
+// const Game = require('./models/game.js')
+// const gamesToInsert = [
+//     {title: 'Cs2', genre: 'shooter', image: 'cs2.jpg'},
+//     {title: 'Elden Ring', genre: 'rpg', image: 'eldenring.jpg'},
+//     {title: 'FF16', genre: 'rpg', image: 'ff16.jpg'},
+//     {title: 'Path of Exile', genre: 'arpg', image: 'pathofexile.jpg'},
+// ]
+// Game.insertMany(gamesToInsert)
+//   .then(result => {
+//     console.log('Inserted successfully:', result);
+//   })
+//   .catch(error => {
+//     console.error('Error inserting documents:', error);
+//   });
+
 
 app.listen(port)
 console.log('Listening to port: ' + port)

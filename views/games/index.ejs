@@ -1,0 +1,29 @@
+<h2>All Games</h2>
+
+<% if (game.length > 0) { %>
+  <% const gamesByGenre = {} %>
+
+  <% game.forEach(gameItem => { %>
+    <% const genre = gameItem.genre %>
+    <% if (!gamesByGenre[genre]) { %>
+      <% gamesByGenre[genre] = [] %>
+    <% } %>
+    <% gamesByGenre[genre].push(gameItem) %>
+  <% }) %>
+
+  <% Object.entries(gamesByGenre).forEach(([genre, games]) => { %>
+    <h3><%= genre %></h3>
+    <ul>
+      <% games.forEach(gameItem => { %>
+        <li>
+          <h4><%= gameItem.title %></h4>
+          <p>Genre: <%= gameItem.genre %></p>
+          <img src="<%= gameItem.imagePath %>" alt="<%= gameItem.title %> Image" width="100" height="100">
+        </li>
+      <% }) %>
+    </ul>
+  <% }) %>
+
+<% } else { %>
+  <p>No games available.</p>
+<% } %>

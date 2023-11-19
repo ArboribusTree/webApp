@@ -4,8 +4,8 @@ forum
 view posts
 create posts
 comments
+profile page
 
 todo:
 game page
-profile page
 home page

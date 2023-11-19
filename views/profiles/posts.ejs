@@ -1,0 +1,25 @@
+<body>
+    <div class="page">
+        <div class="left">
+            <img height="150" width = "100" src='\uploads\pfpImages\<%=user.pfp%>'>
+            <%=user.username%>
+            <%=user.bio%>
+            <!-- add following people -->
+        </div>
+        <div class="right">
+            <a href="/profiles/<%=user.id%>" value="overview">Overview</a>
+            <a href="/profiles/<%=user.id%>/posts" value="posts">Posts</a>
+            <a href="/profiles/<%=user.id%>/comments" value="comments">Comments</a>
+            
+        </div>
+    </div>
+    <a href="/profiles/<%=user.id%>/edit">Edit</a>
+</body>
+<h3>Timeline</h3>
+<% posts.forEach(entry => { %>
+    <div>
+            <p>Post Title: <%= entry.title %></p>
+            <p>Post Description: <%= entry.postDescription %></p>
+            <p>Created At: <%= entry.createdAt %></p>
+    </div>
+<% }) %>

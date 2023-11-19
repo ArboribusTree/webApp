@@ -1,8 +1,11 @@
 const mongoose = require('mongoose')
+const path = require('path')
+const uploadPath = 'uploads/pfpImages'
 
 //subject to change
 const userSchema = new mongoose.Schema({
-    profileDescription: String,
+    bio: String,
+    pfp: String,
     followingGames: [String],
     following: [mongoose.SchemaTypes.ObjectId],
     username:{
@@ -17,4 +20,9 @@ const userSchema = new mongoose.Schema({
     
 })
 
+userSchema.virtual('pfpImagePath').get(function() {
+    return this.pfp ? path.join('/', uploadPath, this.pfp) : null;
+});
+
 module.exports = mongoose.model('User', userSchema)
+module.exports.uploadPath = uploadPath
