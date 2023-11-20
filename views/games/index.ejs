@@ -16,8 +16,7 @@
     <ul>
       <% games.forEach(gameItem => { %>
         <li>
-          <h4><%= gameItem.title %></h4>
-          <p>Genre: <%= gameItem.genre %></p>
+          <h4><a href="games/<%=gameItem.title%>"><%= gameItem.title %></a></h4>
           <img src="<%= gameItem.imagePath %>" alt="<%= gameItem.title %> Image" width="100" height="100">
         </li>
       <% }) %>

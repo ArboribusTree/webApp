@@ -1,11 +1,12 @@
 // controllers/userController.js
 
-const User = require('../models/user');
-const { hashPassword, comparePassword } = require('../middleware/hasher');
+const User = require('../models/user') 
+const { hashPassword, comparePassword } = require('../middleware/hasher') 
 
 const userController = {
   getLoginPage: (req, res) => {
-    res.render('users/login', { user: new User() });
+    console.log('login')
+    res.render('users/login', { user: new User() }) 
   },
 
   login: async (req, res) => {
@@ -57,15 +58,15 @@ const userController = {
 
   getUsers: async (req, res) => {
     try {
-      const users = await User.find({});
-      res.render('users/index', { users });
+      const users = await User.find({}) 
+      res.render('users/index', { users }) 
     } catch (error) {
-      res.redirect('/');
+      res.redirect('/') 
     }
   },
 
   getSignupPage: (req, res) => {
-    res.render('users/signup', { user: new User() });
+    res.render('users/signup', { user: new User() }) 
   },
 
   signup: async (req, res) => {
@@ -105,6 +106,6 @@ const userController = {
         })
       }
   },
-};
+} 
 
-module.exports = userController;
+module.exports = userController 

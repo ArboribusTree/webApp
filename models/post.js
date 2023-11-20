@@ -33,8 +33,8 @@ const postSchema = new mongoose.Schema({
 })
 
 postSchema.virtual('postImagePath').get(function() {
-    return this.image ? path.join('/', uploadPath, this.image) : null;
-});
+    return this.image ? path.join('/', uploadPath, this.image) : null 
+}) 
 
 module.exports = mongoose.model('Post', postSchema)
 module.exports.uploadPath = uploadPath

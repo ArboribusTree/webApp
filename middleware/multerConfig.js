@@ -1,39 +1,39 @@
 // middleware/multerConfig.js
-const multer = require('multer');
-const path = require('path');
-const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+const multer = require('multer') 
+const path = require('path') 
+const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'] 
 
 // Function to create a new multer configuration
 const createMulterConfig = (uploadPath) => {
-    let dynamicUploadPath = uploadPath || ''; // Initialize with the provided upload path or an empty string
+    let dynamicUploadPath = uploadPath || ''  // Initialize with the provided upload path or an empty string
 
     // Function to set the dynamic uploadPath
     const setUploadPath = (newUploadPath) => {
-        dynamicUploadPath = newUploadPath;
-    };
+        dynamicUploadPath = newUploadPath 
+    } 
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             // Use the dynamicUploadPath here
-            cb(null, dynamicUploadPath);
+            cb(null, dynamicUploadPath) 
         },
         filename: (req, file, cb) => {
-            cb(null, Date.now() + path.extname(file.originalname));
+            cb(null, Date.now() + path.extname(file.originalname)) 
         },
-    });
+    }) 
 
     // Function to determine file filter based on mime types
     const filter = (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype));
-    };
+        callback(null, imageMimeTypes.includes(file.mimetype)) 
+    } 
 
     // upload is now a multer object
     const upload = multer({
         storage: storage,
         fileFilter: filter,
-    });
+    }) 
 
-    return { upload, setUploadPath };
-};
+    return { upload, setUploadPath } 
+} 
 
-module.exports = createMulterConfig;
+module.exports = createMulterConfig 

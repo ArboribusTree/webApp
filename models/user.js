@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.virtual('pfpImagePath').get(function() {
-    return this.pfp ? path.join('/', uploadPath, this.pfp) : null;
-});
+    return this.pfp ? path.join('/', uploadPath, this.pfp) : null 
+}) 
 
 module.exports = mongoose.model('User', userSchema)
 module.exports.uploadPath = uploadPath

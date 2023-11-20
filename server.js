@@ -40,21 +40,21 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //routes
-const indexRouter = require('./routes/index')
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
 const postRouter = require('./routes/post')
 const gameRouter = require('./routes/games')
+const homeRouter = require('./routes/home')
 
 //initializing routes
-app.use('/', indexRouter)
+app.use('/', homeRouter)
 app.use('/users', userRouter)
 app.use('/profiles', profileRouter)
 app.use('/posts', postRouter)
 app.use('/games', gameRouter)
 
 //uncomment this if running for the first time
-// const Game = require('./models/game.js')
+const Game = require('./models/game.js')
 // const gamesToInsert = [
 //     {title: 'Cs2', genre: 'shooter', image: 'cs2.jpg'},
 //     {title: 'Elden Ring', genre: 'rpg', image: 'eldenring.jpg'},

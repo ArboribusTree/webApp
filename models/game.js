@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const path = require('path');
+const mongoose = require('mongoose') 
+const path = require('path') 
 const uploadPath = '/uploads/gameImages'
 
 const gameSchema = mongoose.Schema({
@@ -10,14 +10,14 @@ const gameSchema = mongoose.Schema({
     },
     genre: String,
     image: String
-});
+}) 
 
 gameSchema.virtual('imagePath').get(function () {
     if (this.image) {
-        return path.join(uploadPath, this.image);
+        return path.join(uploadPath, this.image) 
     }
-    return null;
-});
+    return null 
+}) 
 
-module.exports = mongoose.model('Game', gameSchema);
+module.exports = mongoose.model('Game', gameSchema) 
 module.exports.uploadPath = uploadPath

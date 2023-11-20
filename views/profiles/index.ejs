@@ -13,7 +13,11 @@
             
         </div>
     </div>
-    <a href="/profiles/<%=user.id%>/edit">Edit</a>
+    <% if(isLoggedIn) {%>
+        <% if(user.id === loggedUser._id) {%>
+            <a href="/profiles/<%=user.id%>/edit">Edit</a>
+        <% } %>
+    <% } %>
 </body>
 <h3>Timeline</h3>
 <% timeline.forEach(entry => { %>
