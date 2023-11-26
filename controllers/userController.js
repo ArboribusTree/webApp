@@ -42,7 +42,7 @@ const userController = {
 
       //this creates a session if user successfully logs in
       req.session.user = user
-      return res.redirect('/users')
+      return res.redirect('/')
     } else {
       //just a console logger
       console.log("Auth denied")

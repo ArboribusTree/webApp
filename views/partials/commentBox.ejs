@@ -1,0 +1,8 @@
+<div><%= comment.author[0].username %></div>
+        <div><%= comment.commentDescription %></div>
+        <div><%= comment.createdAt.toLocaleDateString("en-US", { 
+            month: 'long', 
+            day: 'numeric', 
+            year: 'numeric' 
+            }) %></div>
+        <div>----------------------</div>

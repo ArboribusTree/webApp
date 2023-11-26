@@ -1,12 +1,6 @@
 <h2>Posts</h2>
 
-<div><%= post.title %></div>
-<div><%= post.author %></div>
-<div><%= post.postDescription %></div>
-<div><%= post.game %></div>
-<div><%= post.upvote %></div>
-<div><img height="150" width="100" src="<%= post.postImagePath %>"></div>
-
+<%- include ('../partials/postBox.ejs') %>
 <br>
 <br>
 <form action="./createComments" method="POST">
@@ -17,14 +11,7 @@
 
 <% if (post.comments && post.comments.length > 0) { %>
     <% post.comments.forEach(comment => { %>
-        <div><%= comment.author %></div>
-        <div><%= comment.commentDescription %></div>
-        <div><%= comment.createdAt.toLocaleDateString("en-US", { 
-            month: 'long', 
-            day: 'numeric', 
-            year: 'numeric' 
-            }) %></div>
-        <div>----------------------</div>
+        <%- include('../partials/commentBox.ejs', {comment: comment}) %>
     <% }) %>
 <% } else { %>
     <p>No comments available.</p>

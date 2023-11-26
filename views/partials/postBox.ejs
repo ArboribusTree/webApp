@@ -1,0 +1,24 @@
+<div class="post-box-row">
+    <div class="post-box-content">
+        <img src="uploads/pfpImages/<%= post.author.pfp %>">
+        <div class="post-box-content-right">
+            <div class="post-box-content username"><%=post.author.username%></div>
+            <div class="post-info">
+                <%= post.createdAt.toLocaleDateString("en-US", { 
+                    month: 'long', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                }) %>
+                -t5y
+                <%=post.game%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="post-title"href="/posts/<%=post.id%>"><%=post.title%></a>
+<div class="post-box-content"><%=post.postDescription%></div>
+
+<div class="post-box-image">
+    <img src="<%= post.postImagePath %>">
+</div>

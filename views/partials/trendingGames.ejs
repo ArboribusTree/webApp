@@ -1,0 +1,12 @@
+<!-- Add a container for the trending games -->
+<div id="trending-games-container">
+    <h1>Trending Games</h1>
+    <div class="game-list">
+        <% trendingGames.forEach(trend => { %>
+            <a href="/games/<%= trend.title %>" class="game-link">
+                <img src="<%= trend.imagePath %>" alt="<%= trend.title %>">
+                <span class="game-title"><%= trend.title %></span>
+            </a>
+        <% }) %>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+@import 'fonts.css';
+
+#header-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5.5rem;
+    height: 5rem;
+    background-color: #445A65;
+    color: white; /* Default text color for the entire header-nav */
+    padding: 0 5rem 0 2rem;
+
+
+}
+
+#header-left {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    font-family: 'Unica One', sans-serif;
+    margin-right: 3.6rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.header-tab {
+    margin-right: 1.5rem;
+    text-decoration: none;
+    color: #A2A2A1;
+}
+
+.header-tab:active{
+    color: white;
+}
+.header-tab:hover{
+    font-size: 1.3rem;
+    color: white;
+}
+
+#header-user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#header-user img {
+    border-radius: 50%; /* Make the image circular */
+    cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+}
+
+#header-user img:hover {
+    border: 2px solid #fff; /* Add a border when hovering over the image */
+}
+
+/* Optional: Style for the logged-in username */
+#header-user .username {
+    font-size: 0.8rem;
+    color: #A2A2A1;
+}
+
+#header-user a {
+    text-decoration: none;
+    color: white;
+}

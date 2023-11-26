@@ -12,4 +12,4 @@ router.get('/', userController.getUsers)
 router.get('/signup', userController.getSignupPage) 
 router.post('/signup', userController.signup) 
 
-module.exports = router 
+module.exports = router  

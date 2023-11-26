@@ -1,17 +1,7 @@
-<h2>HOME</h2>
-<br>
-<h1>Trending Games</h1>
-<%trendingGames.forEach(trend => {%>
-    <a href="/games/<%=trend.title%>">
-    <img height="150" width="100" src="<%=trend.imagePath%>">
-    </a>
-<%})%>
-<br>
-<h1>Recent Posts</h1>
-    <% posts.forEach(post => {%>
-        <div>
-            <p>Post Title: <%= post.title %></p>
-            <p>Post Description: <%= post.postDescription %></p>
-            <p>Created At: <%= post.createdAt %></p>
-    </div>
+<div>
+    <h2>HOME</h2>
+    <h1>Recent Posts</h1>
+    <% posts.forEach(post => { %>
+        <%- include('./partials/postBox.ejs', { post: post }) %>
     <% }) %>
+</div>

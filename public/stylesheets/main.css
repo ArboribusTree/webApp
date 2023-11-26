@@ -1,0 +1,176 @@
+/* Import fonts and shared styles */
+@import 'shared/variables.css';
+@import 'shared/fonts.css';
+@import 'shared/header.css';
+
+:root {
+    font-size: 20px;
+    color: white;
+}
+
+body {
+    font-family: 'Helvetica';
+    background-color: #223843;
+    margin: 0;
+}
+
+#page {
+    display: flex;
+    flex-direction: column;
+}
+
+#main-container {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 0 4rem;
+    min-height: 800px;
+}
+
+#trending-games-container {
+    background-color: #445A65;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+#content-body {
+    width: 60%;
+    /* margin-right: 9rem;
+    margin-left: 4rem; */
+}
+
+/* Common styling for trending games and content body */
+#trending-games,
+#content-body {
+    padding: 40px;
+    border-radius: 15px;
+    background-color: #445A65;
+}
+
+
+
+/* posts */
+h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.post-box {
+    padding: 15px;
+    margin-bottom: 15px;
+    color: #DBDEE1;
+}
+
+.post-title{
+    text-decoration: none;
+    color: #DBDEE1;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.post-box-content img {
+    max-width: 5%;
+    height: auto;
+    border-radius: 100%;
+    margin-right: 30px;
+}
+
+.post-info {
+    color: #DBDEE1;
+}
+
+/* Additional styling for the post box */
+.post-box-content {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.post-box-row {
+    display: flex;
+    align-items: center;
+}
+
+.post-box-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.post-info {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.post-box-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* games */
+.game-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-link {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.game-link img {
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.game-link:hover img {
+    transform: scale(1.1);
+}
+
+.game-title {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.games{
+    display:flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.game-images{
+    display: flex;
+    gap: 40px;
+}
+.game-images h4 a {
+    text-decoration: none;
+    color: white;
+}
+
+.game-items:hover img{
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+}
+
+/* login */
+.login button {
+  }

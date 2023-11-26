@@ -24,7 +24,7 @@ const createPosts = async (req, res) => {
     try {
         const post = new Post({
             title: req.body.title,
-            author: req.session.user.username,
+            author: req.session.user,
             postDescription: req.body.postDescription,
             game: req.body.game,
             upvote: 0,
@@ -47,7 +47,15 @@ const createPosts = async (req, res) => {
 }
 
 const getPostById = async (req, res) => {
-    const post = await Post.findById(req.params.id).populate('comments')
+    const post = await Post.findById(req.params.id)
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'author', // Assuming 'author' is the field with the objectId
+                    model: 'User' // Replace 'User' with your actual User model
+                }
+            })
+            .populate('author')
     res.cookie('postId', post.id, {
         maxAge: 60000,
     }) 
@@ -62,7 +70,7 @@ const createComments = async (req, res) => {
         let post = await Post.findById(postId) 
 
         const comment = new Comment({
-            author: req.session.user.username,
+            author: req.session.user,
             commentDescription: req.body.comment,
             postId: post.id,
         }) 
@@ -81,9 +89,10 @@ const createComments = async (req, res) => {
 
 const getPosts = async (req, res) => {
     try {
-        const posts = await Post.find({}) 
+        const posts = await Post.find({}).populate('author')
         res.render('posts/index', { posts: posts }) 
-    } catch {
+    } catch (err){
+        console.log(err)
         res.redirect('/') 
     }
 } 

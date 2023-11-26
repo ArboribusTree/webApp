@@ -1,15 +1,9 @@
 <h2>FORUMS | Latest Posts</h2>
 <form action="/posts" method="GET">
-    <label>Forum</label>
 </form>
-<br>
-<% posts.forEach(post => {%>
-    <div><a href="/posts/<%=post.id%>"><%=post.title%></a></div>
-    <div><%=post.author%></div>
-    <div><%=post.postDescription%></div>
-    <div><%=post.game%></div>
-    <div><%=post.upvote%></div>
-    <div><img height="150" width = "100" src="<%= post.postImagePath %>"</div>
-    <br>
-<%}); %>
 
+<% posts.forEach(post => { %>
+    <div class="post-box">
+        <%- include('../partials/postBox.ejs', {post: post}) %>
+    </div>
+<% }); %>

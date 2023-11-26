@@ -1,13 +1,6 @@
 <h2><%=game.title%></h2>
 <br>
 <h1>Timeline</h1>
-<%trendingGames.forEach(trend => {%>
-    <a href="/games/<%=trend.title%>">
-    <img height="150" width="100" src="<%=trend.imagePath%>">
-    </a>
-<%})%>
-<br>
-<br>
 <h1>Recent Posts</h1>
     <% posts.forEach(post => {%>
         <div>

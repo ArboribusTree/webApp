@@ -5,7 +5,10 @@ const uploadPath = 'uploads/pfpImages'
 //subject to change
 const userSchema = new mongoose.Schema({
     bio: String,
-    pfp: String,
+    pfp: {
+        type: String,
+        default: 'defaultPFP.jpg'
+    },
     followingGames: [String],
     following: [mongoose.SchemaTypes.ObjectId],
     username:{

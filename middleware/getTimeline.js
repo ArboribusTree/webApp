@@ -6,8 +6,8 @@ const Comment = require('../models/comment')
 async function getTimeline (userId){
     try {
         const user = await User.findById(userId)
-        const posts = await Post.find({author: user.username}).sort({createdAt:'desc'}).limit(5)
-        const comments = await Comment.find({author: user.username}).sort({createdAt:'desc'}).limit(5)
+        const posts = await Post.find({author: user}).sort({createdAt:'desc'}).limit(5)
+        const comments = await Comment.find({author: user}).sort({createdAt:'desc'}).limit(5)
         
 
         let timeline = [...posts, ...comments].sort((a, b) => b.createdAt - a.createdAt)

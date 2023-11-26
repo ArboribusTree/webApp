@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Comment = require('./comment')
+const User = require('./user')
 const path = require('path')
 const uploadPath = 'uploads/postImages'
 //idk what to do with downvotes
@@ -9,7 +10,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     postDescription: {
         type: String,
         required: true

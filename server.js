@@ -39,6 +39,10 @@ db.once('open', () => console.log('Connected to Mongoose'))
 app.use(passport.initialize())
 app.use(passport.session())
 
+const trendingGamesMiddleware = require('./middleware/trendingGamesMiddleware.js')
+
+app.use(trendingGamesMiddleware)
+
 //routes
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
