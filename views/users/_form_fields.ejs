@@ -1,6 +1,11 @@
-<label>Username</label>
-<input type="text" name="username" value="<%= user.username %>">
-<br>
-<label>Password</label>
-<input type="text" name="password" value="<%= user.password %>">
-<br>
+<div class="login-forms">
+    <div class="login-labels">
+        <label>Username</label>
+        <label>Password</label>
+    </div>
+    
+    <div class="login-inputs">
+        <input id="username" type="text" name="username" value="<%= user.username %>">
+        <input id="password" type="text" name="password" value="<%= user.password %>">
+    </div>
+</div>

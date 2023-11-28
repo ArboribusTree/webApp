@@ -1,9 +1,18 @@
-<h2>FORUMS | Latest Posts</h2>
-<form action="/posts" method="GET">
-</form>
-
-<% posts.forEach(post => { %>
-    <div class="post-box">
-        <%- include('../partials/postBox.ejs', {post: post}) %>
+<div class="forum">
+    <div class="forum-header">
+        <h2>FORUMS | Latest Posts</h2>
+        <div id="create-post-link">
+            <a href="posts/createPosts">
+                <img id="create-post-icon" src="uploads/icons/create.png">
+            </a>
+        </div>
     </div>
-<% }); %>
+
+    <form action="/posts" method="GET">
+        <% posts.forEach(post => { %>
+            <div class="post-box">
+                <%- include('../partials/postBox.ejs', {post: post}) %>
+            </div>
+        <% }); %>
+    </form>
+</div>

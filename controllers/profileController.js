@@ -1,14 +1,16 @@
 // controllers/profileController.js
 const User = require('../models/user.js') 
 const getTimeline = require('../middleware/getTimeline')
+const getUserPostsMiddeware = require('../middleware/getUserPostsMiddleware.js')
 
 async function getProfilePage(req, res) {
     if(!res.locals.isLoggedIn){
-        res.render('users/login',{ user: new User() })
+        res.render('users/login', {user: ''})
     } else {
         const username = req.session.user.username 
         
         const user = await User.findOne({ username }) 
+        getUserPostsMiddeware(req, res)
         if (user) {
             res.redirect(`/profiles/${user.id}`) 
         } else {

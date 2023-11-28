@@ -59,19 +59,19 @@ app.use('/games', gameRouter)
 
 //uncomment this if running for the first time
 const Game = require('./models/game.js')
-// const gamesToInsert = [
-//     {title: 'Cs2', genre: 'shooter', image: 'cs2.jpg'},
-//     {title: 'Elden Ring', genre: 'rpg', image: 'eldenring.jpg'},
-//     {title: 'FF16', genre: 'rpg', image: 'ff16.jpg'},
-//     {title: 'Path of Exile', genre: 'arpg', image: 'pathofexile.jpg'},
-// ]
-// Game.insertMany(gamesToInsert)
-//   .then(result => {
-//     console.log('Inserted successfully:', result);
-//   })
-//   .catch(error => {
-//     console.error('Error inserting documents:', error);
-//   });
+const gamesToInsert = [
+    {title: 'Cs2', genre: 'shooter', image: 'cs2.jpg'},
+    {title: 'Elden Ring', genre: 'rpg', image: 'eldenring.jpg'},
+    {title: 'FF16', genre: 'rpg', image: 'ff16.jpg'},
+    {title: 'Path of Exile', genre: 'arpg', image: 'pathofexile.jpg'},
+]
+Game.insertMany(gamesToInsert)
+  .then(result => {
+    console.log('Inserted successfully:', result);
+  })
+  .catch(error => {
+    console.error('Error inserting documents:', error);
+  });
 
 
 app.listen(port)

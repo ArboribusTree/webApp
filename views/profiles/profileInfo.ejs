@@ -1,0 +1,24 @@
+<div class="profile-info">
+    <div class="user-info">
+        <div class="circle-container">
+            <img id="profile-pfp" src='/uploads/pfpImages/<%=user.pfp%>'>
+        </div>
+        <div class="user-info-right">
+            <div id="profile-username"><%=user.username%></div>
+            <div id="profile-bio"><%=user.bio%></div>
+            <!-- add following people -->
+        </div>
+    </div>
+    <div class="profile-buttons">
+        <div>
+            <a href="/profiles/<%=user.id%>" value="overview">Overview</a>
+            <a href="/profiles/<%=user.id%>/posts" value="posts">Posts</a>
+            <a href="/profiles/<%=user.id%>/comments" value="comments">Comments</a>
+        </div>
+        <% if(isLoggedIn) {%>
+            <% if(user.id === loggedUser._id) {%>
+                <a href="/profiles/<%=user.id%>/edit">Edit</a>
+            <% } %>
+        <% } %>
+    </div>
+</div>

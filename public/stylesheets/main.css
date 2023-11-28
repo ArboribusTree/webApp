@@ -60,6 +60,17 @@ form {
     margin-bottom: 20px;
 }
 
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#create-post-link a{
+}
+#create-post-icon{
+    width: 7%;
+}
 .post-box {
     padding: 15px;
     margin-bottom: 15px;
@@ -84,7 +95,7 @@ form {
     color: #DBDEE1;
 }
 
-/* Additional styling for the post box */
+/* post box */
 .post-box-content {
     display: flex;
     margin-bottom: 10px;
@@ -116,6 +127,11 @@ form {
     height: auto;
     border-radius: 8px;
     margin-top: 10px;
+}
+
+#post-name{
+    border: 1px solid white;
+    background: transparent;
 }
 
 /* games */
@@ -171,4 +187,50 @@ form {
     border-radius: 5px;
 }
 
+/* profile */
+
+.profile-buttons a{
+    text-decoration: none;
+}
+.user-info{
+    display: flex;
+}
+
+.circle-container{
+    width: 10%;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    
+}
+#profile-pfp{
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain the original aspect ratio */
+    position: absolute; /* Position the image relative to the container */
+    top: 50%; /* Move the image to the center vertically */
+    left: 50%; /* Move the image to the center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for center positioning */
+    border: 2px solid #fff; /* Add a border (you can adjust the color and size) */
+    border-radius: 50%; /* Make it a circle */
+}
+
 /* login */
+
+.login-forms{
+    display: flex;
+    flex: 1;
+}
+
+.login-labels{
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+    justify-content: space-between;
+}
+
+.login-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}

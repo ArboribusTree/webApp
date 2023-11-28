@@ -6,7 +6,14 @@ const Comment = require('../models/comment')
 async function getTimeline (userId){
     try {
         const user = await User.findById(userId)
-        const posts = await Post.find({author: user}).sort({createdAt:'desc'}).limit(5)
+        const posts = await Post.find({author: user}).populate({
+            path: 'comments',
+            populate: {
+                path: 'author',
+                model: 'User' 
+            }
+        })
+        .populate('author').limit(5)
         const comments = await Comment.find({author: user}).sort({createdAt:'desc'}).limit(5)
         
 
