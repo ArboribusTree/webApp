@@ -1,15 +1,22 @@
 <div class="create-posts">
     <h2>Create Posts</h2>
     <form action="./createPosts" method="POST" enctype="multipart/form-data">
-        <input id="post-name" type="text" name="title" placeholder="Title">
-        <textarea id="post-description" name="postDescription" placeholder="Description"></textarea>
-        <select name="game">
-            <option value="Path of Exile">Path of Exile</option>
-            <option value="Cs2">Cs2</option>
-            <option value="FF16">FF16</option>
-            <option value="Elden Ring">Elden Ring</option>
-        </select>
-        <input id="post-image" type="file" name="imagePost">
-        <button id="post-button" type="submit">Create</button>
+        <div class="create-post-row1">
+            <input id="post-name" type="text" name="title" placeholder="Title">
+            <select id="game-options" name="game">
+                <option value="Path of Exile">Path of Exile</option>
+                <option value="Cs2">Cs2</option>
+                <option value="FF16">FF16</option>
+                <option value="Elden Ring">Elden Ring</option>
+            </select>
+        </div>
+        <div class="create-post-row2">
+            <textarea id="post-description" name="postDescription" placeholder="Description"></textarea>
+        </div>
+        <div class="create-post-row3">
+            <input id="post-image" type="file" name="imagePost">
+            <label id="post-image-label" for="post-image">Add attachment</label>
+            <button id="post-button" type="submit">Create</button>
+        </div>
     </form>
 </div>

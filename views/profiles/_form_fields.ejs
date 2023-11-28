@@ -1,4 +1,17 @@
-<label>Name</label>
-<input type="text" name="username" value="<%= user.username %>">
-<input type="text" name="bio" value="<%= user.bio %>">
-<input type="file" name="pfp">
+<div class="edit-left">
+    <input id="edit-pfp" type="file" name="pfp">
+    <div class="circle-container">
+        <label id="edit-pfp-label" class="user-pfp" for="edit-pfp">
+            <img class="user-pfp" src="/uploads/pfpImages/<%=loggedUser.pfp%>">
+        </label>
+    </div>
+</div>
+<div class="edit-right">
+    <div class="edit-row1">
+        <input id="edit-username" type="text" name="username" value="<%= user.username %>">
+    </div>
+    <div class="edit-row2">
+        <textarea id="edit-bio" name="bio" value=""><%= user.bio %></textarea>
+    </div>
+</div>
+
