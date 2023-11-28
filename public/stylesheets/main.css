@@ -80,7 +80,7 @@ form {
 #create{ 
     color: #333;
 }
-.user-info#create-post-icon{
+#create-post-icon{
     height: 30px;
     width: 30px;
     margin-right: 30px;
