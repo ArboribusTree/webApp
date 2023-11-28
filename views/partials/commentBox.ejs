@@ -1,8 +1,14 @@
-<div><%= comment.author[0].username %></div>
-        <div><%= comment.commentDescription %></div>
-        <div><%= comment.createdAt.toLocaleDateString("en-US", { 
-            month: 'long', 
-            day: 'numeric', 
-            year: 'numeric' 
-            }) %></div>
-        <div>----------------------</div>
+<div class="commentBox">
+    <div class="comment-user-info">
+        <div class="circle-container" style="height: 45px; width: 45px;">
+            <img class="user-pfp" src="/uploads/pfpImages/<%=comment.author[0].pfp%>">
+        </div>
+        <div id="comment-username"><%= comment.author[0].username %></div>
+    </div>
+    <div id="comment-description"><%= comment.commentDescription %></div>
+    <div id="comment-date"><%= comment.createdAt.toLocaleDateString("en-US", { 
+                                                                        month: 'long', 
+                                                                        day: 'numeric', 
+                                                                        year: 'numeric' 
+                                                                    }) %></div>
+    </div>

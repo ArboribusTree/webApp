@@ -1,18 +1,17 @@
-<h2>Posts</h2>
-
-<%- include ('../partials/postBox.ejs') %>
-<br>
-<br>
-<form action="./createComments" method="POST">
-    <textarea name="comment">Comment</textarea>
-    <button type="submit">Create</button>
-</form>
-<br>
-
-<% if (post.comments && post.comments.length > 0) { %>
-    <% post.comments.forEach(comment => { %>
-        <%- include('../partials/commentBox.ejs', {comment: comment}) %>
-    <% }) %>
-<% } else { %>
-    <p>No comments available.</p>
-<% } %>
+<div class="posts">
+    <%- include ('../partials/postBox.ejs') %>
+    <form action="./createComments" method="POST">
+        <textarea name="comment">Comment</textarea>
+        <button type="submit">Create</button>
+    </form>
+    
+    <div class="post-comments">
+        <% if (post.comments && post.comments.length > 0) { %>
+            <% post.comments.forEach(comment => { %>
+                <%- include('../partials/commentBox.ejs', {comment: comment}) %>
+                <% }) %>
+        <% } else { %>
+            <p>No comments available.</p>
+        <% } %>
+    </div>
+</div>

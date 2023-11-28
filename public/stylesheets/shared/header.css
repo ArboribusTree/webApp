@@ -58,6 +58,7 @@
 
 /* Optional: Style for the logged-in username */
 #header-user .username {
+    font-weight: lighter;
     font-size: 0.8rem;
     color: #A2A2A1;
 }

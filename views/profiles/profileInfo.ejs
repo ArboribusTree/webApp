@@ -1,7 +1,13 @@
 <div class="profile-info">
     <div class="user-info">
-        <div class="circle-container">
-            <img id="profile-pfp" src='/uploads/pfpImages/<%=user.pfp%>'>
+        <div id="profile-header-pfp">
+            <div class="circle-container">
+                <img class="user-pfp" src='/uploads/pfpImages/<%=user.pfp%>'>
+            </div>
+            <% if(isLoggedIn) {%>
+                <% if(user.id === loggedUser._id) {%>
+                    <a id="edit" href="/profiles/<%=user.id%>/edit">Edit</a>
+                    <% } %>
         </div>
         <div class="user-info-right">
             <div id="profile-username"><%=user.username%></div>
@@ -9,16 +15,15 @@
             <!-- add following people -->
         </div>
     </div>
-    <div class="profile-buttons">
-        <div>
+    <div class="profile-header-buttons">
+        <% } %>
+        <div class="profile-header-links">
             <a href="/profiles/<%=user.id%>" value="overview">Overview</a>
             <a href="/profiles/<%=user.id%>/posts" value="posts">Posts</a>
             <a href="/profiles/<%=user.id%>/comments" value="comments">Comments</a>
+            <!-- <div id="profile-overview"><a href="/profiles/<%=user.id%>" value="overview">Overview</a></div>
+            <div id="profile-posts"><a href="/profiles/<%=user.id%>/posts" value="posts">Posts</a></div>
+            <div id="profile-comments"><a href="/profiles/<%=user.id%>/comments" value="comments">Comments</a></div> -->
         </div>
-        <% if(isLoggedIn) {%>
-            <% if(user.id === loggedUser._id) {%>
-                <a href="/profiles/<%=user.id%>/edit">Edit</a>
-            <% } %>
-        <% } %>
     </div>
 </div>

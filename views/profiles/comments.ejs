@@ -6,6 +6,6 @@
 <h3>Timeline</h3>
 <% comments.forEach(entry => { %>
     <div>
-            <%- include('../partials/commentBox') %>
+            <%- include('../partials/commentBox', {comment: entry}) %>
     </div>
 <% }) %>

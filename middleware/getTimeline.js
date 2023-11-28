@@ -14,7 +14,7 @@ async function getTimeline (userId){
             }
         })
         .populate('author').limit(5)
-        const comments = await Comment.find({author: user}).sort({createdAt:'desc'}).limit(5)
+        const comments = await Comment.find({author: user}).populate('author').sort({createdAt:'desc'}).limit(5)
         
 
         let timeline = [...posts, ...comments].sort((a, b) => b.createdAt - a.createdAt)
