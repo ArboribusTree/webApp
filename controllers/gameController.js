@@ -22,7 +22,7 @@ async function getGameListPage(req, res) {
 async function getGamePage(req, res) {
     const title = req.params.title
     const game = await Game.findOne({title: title})
-    const posts = await Post.find({game: game.title})
+    const posts = await Post.find({game: game.title}).populate('author')
     res.render('games/page', {
         game: game,
         posts: posts

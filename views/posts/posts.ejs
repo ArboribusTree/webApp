@@ -1,8 +1,8 @@
 <div class="posts">
     <%- include ('../partials/postBox.ejs') %>
     <form action="./createComments" method="POST">
-        <textarea name="comment">Comment</textarea>
-        <button type="submit">Create</button>
+        <textarea id="post-comment-box" name="comment">Comment</textarea>
+        <div id="post-comment-button"><button id="post-comment-box-button" type="submit">Create</button></div>
     </form>
     
     <div class="post-comments">

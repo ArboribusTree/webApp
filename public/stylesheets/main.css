@@ -14,6 +14,16 @@ body {
     margin: 0;
 }
 
+button{
+    height: 20px;
+    width: 50px;
+    font-family: 'Helvetica';
+    background: #223843;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
 #page {
     display: flex;
     flex-direction: column;
@@ -29,9 +39,9 @@ body {
 
 #trending-games-container {
     background-color: #445A65;
-    padding: 20px;
     border-radius: 10px;
     color: white;
+    padding: 20px;
 }
 
 #content-body {
@@ -236,13 +246,26 @@ form {
     align-self: center;
 }
 
-#post-button{
-    height: 20px;
+.posts form{
+    margin: 0px;
+    display: flex;
+    gap: 10px;
+}
+
+#post-comment-box{
+    resize: none;
+    width: 45%;
+    height: 50px;
     background: transparent;
-    background-color: #223843;
-    border: none;
+    border: 1px solid white;
     border-radius: 5px;
-    color: white;
+    color: gray;
+}
+
+#post-comment-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 /* edit profile */
