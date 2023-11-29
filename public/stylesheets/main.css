@@ -126,7 +126,7 @@ form {
     margin-left: 15px;
 }
 
-/* post box */
+/* postBox */
 .post-box{
     border-bottom: 1px solid rgb(188, 187, 187);
 }
@@ -242,8 +242,9 @@ form {
     font-size: 15px;
     border-radius: 5px;
     width: 120px;
+    height: 20px;
     background-color: #223843;
-    align-self: center;
+    text-align: center;
 }
 
 .posts form{
