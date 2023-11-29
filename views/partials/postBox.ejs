@@ -1,11 +1,17 @@
 <div class="post-box">
     <div class="post-box-row">
         <div class="post-box-content">
-            <div class="circle-container" style="height: 50px; width: 50px;">
-                <img class="user-pfp" src="/uploads/pfpImages/<%= post.author.pfp %>">
-            </div>
+            <a href="/profiles/<%=post.author.id%>">
+                <div class="circle-container" style="height: 50px; width: 50px;">
+                    <img class="user-pfp" src="/uploads/pfpImages/<%= post.author.pfp %>">
+                </div>
+            </a>
             <div class="post-box-content-right">
-                <div class="post-box-content username"><%=post.author.username%></div>
+                <div class="post-box-content-username">
+                    <a href="/profiles/<%=post.author.id%>">
+                        <%=post.author.username%>
+                    </a>
+                </div>
                 <div class="post-info">
                     <%= post.createdAt.toLocaleDateString("en-US", { 
                         month: 'long', 

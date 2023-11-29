@@ -114,6 +114,13 @@ form {
     margin-left: 20px;
 }
 
+.post-box-content-username a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .post-info {
     color: #DBDEE1;
 }
