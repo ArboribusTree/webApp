@@ -7,16 +7,12 @@
     <% console.log(entry) %>
     <div>
         <% if (entry.title) { %>
-            <!-- It's a post -->
+            <!-- post -->
             <%- include('../partials/postBox.ejs', {post: entry})%>
-            <!-- <p>Post Title: <%= entry.title %></p>
-            <p>Post Description: <%= entry.postDescription %></p> -->
         <% } else { %>
-            <!-- It's a comment -->
+            <!-- comment -->
             <%- include('../partials/commentBox.ejs', {comment: entry}) %>
-            <!-- <p>Comment Description: <%= entry.commentDescription %></p> -->
         <% } %>
-        <!-- Display other entry information -->
     </div>
 <% }) %>
 </body>

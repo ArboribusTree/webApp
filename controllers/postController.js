@@ -35,14 +35,16 @@ const createPosts = async (req, res) => {
         res.redirect('/posts') 
     } catch {
         if (fileName === null) {
+            console.log('missing post image')
             res.render('posts/createPosts', {
                 errorMessage: 'Missing Post Image',
             }) 
+        } else{
+            removeImagePost(fileName, uploadPath) 
+            res.render('posts/createPosts', {
+                errorMessage: 'error',
+            })
         }
-        removeImagePost(fileName, uploadPath) 
-        res.render('posts/createPosts', {
-            errorMessage: 'error',
-        })
     }
 }
 
