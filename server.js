@@ -43,12 +43,16 @@ const trendingGamesMiddleware = require('./middleware/trendingGamesMiddleware.js
 
 app.use(trendingGamesMiddleware)
 
+
+
 //routes
 const userRouter = require('./routes/users')
 const profileRouter = require('./routes/profiles')
 const postRouter = require('./routes/post')
 const gameRouter = require('./routes/games')
 const homeRouter = require('./routes/home')
+const aboutRouter = require('./routes/aboutUs')
+
 
 //initializing routes
 app.use('/', homeRouter)
@@ -56,6 +60,7 @@ app.use('/users', userRouter)
 app.use('/profiles', profileRouter)
 app.use('/posts', postRouter)
 app.use('/games', gameRouter)
+app.use('/aboutus', aboutRouter)
 
 //uncomment this if running for the first time
 const Game = require('./models/game.js')
