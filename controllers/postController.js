@@ -28,6 +28,7 @@ const createPosts = async (req, res) => {
             postDescription: req.body.postDescription,
             game: req.body.game,
             upvote: 0,
+            downvote: 0,
             image: fileName,
         }) 
 
