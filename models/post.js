@@ -20,6 +20,7 @@ const postSchema = new mongoose.Schema({
     },
     game: String,
     upvote: Number,
+    downvote: Number,
     comments: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Comment',
