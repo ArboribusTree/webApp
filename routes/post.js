@@ -19,4 +19,8 @@ router.post('/createComments', postController.createComments)
 
 router.get('/', postController.getPosts) 
 
+router.post('/:id/upvotePost', postController.upvotePost)
+
+router.post('/:id/downvotePost', postController.downvotePost)
+
 module.exports = router 
