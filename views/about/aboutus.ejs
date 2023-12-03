@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <header>
+        <h1>About Us</h1>
+    </header>
+
+    <section>
+        <h2>Our Technology Stack</h2>
+        <p>
+            In our commitment to transparency, we believe in keeping our users informed about the technologies
+            that power our platform. Here are the key NPM packages and third-party libraries that contribute to the
+            functionality and performance of our web application:
+        </p>
+
+        <ul>
+            <% npmPackages.forEach(package => { %>
+                <li><strong><%= package.name %> (v<%= package.version %>):</strong> <%= package.description %></li>
+            <% }) %>
+        </ul>
+
+        <h2>Development Dependencies</h2>
+
+        <p>
+            In addition to our production dependencies, we utilize the following development dependencies to enhance our
+            development workflow:
+        </p>
+
+        <ul>
+            <li><strong>dotenv (v16.3.1):</strong> Load environment variables from a .env file.</li>
+            <li><strong>nodemon (v3.0.1):</strong> Monitor for changes in your application and automatically restart the
+                server.</li>
+        </ul>
+
+    </section>
+
+</body>
+
+</html>
