@@ -1,0 +1,13 @@
+<h2>Edit Post</h2>
+<form action="/posts/<%= post._id %>/edit" method="POST">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<%= post.title %>" required>
+    </div>
+    <div>
+        <label for="postDescription">Post Description:</label>
+        <textarea id="postDescription" name="postDescription" required><%= post.postDescription %></textarea>
+    </div>
+
+    <button type="submit">Update</button>
+</form>
