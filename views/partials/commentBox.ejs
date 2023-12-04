@@ -1,11 +1,9 @@
 <div class="commentBox">
     <div class="comment-user-info">
-        <a href="/profiles/<%= comment.author[0].id %>">
-            <div class="circle-container" style="height: 45px; width: 45px;">
-                <img class="user-pfp" src="/uploads/pfpImages/<%=comment.author[0].pfp%>">
-            </div>
-            <div id="comment-username"><%= comment.author[0].username %></div>
-        </a>
+        <div class="circle-container" style="height: 45px; width: 45px;">
+            <img class="user-pfp" src="/uploads/pfpImages/<%=comment.author[0].pfp%>">
+        </div>
+        <div id="comment-username"><%= comment.author[0].username %></div>
     </div>
     <div id="comment-description"><%= comment.commentDescription %></div>
     <div id="comment-date"><%= comment.createdAt.toLocaleDateString("en-US", { 
@@ -13,4 +11,12 @@
                                                                         day: 'numeric', 
                                                                         year: 'numeric' 
                                                                     }) %></div>
+<% if (loggedUser && comment.author[0]._id.equals(loggedUser._id)) { %>
+    <div>
+        <a href="/posts/<%= post._id %>/comments/edit/<%= comment._id %>">Edit</a>
+        <form action="/posts/<%= post._id %>/comments/<%= comment._id %>/delete" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<% } %>
     </div>
