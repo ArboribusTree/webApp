@@ -28,7 +28,6 @@ const createPosts = async (req, res) => {
             postDescription: req.body.postDescription,
             game: req.body.game,
             upvote: 0,
-            downvote: 0,
             image: fileName,
         }) 
 
@@ -36,16 +35,14 @@ const createPosts = async (req, res) => {
         res.redirect('/posts') 
     } catch {
         if (fileName === null) {
-            console.log('missing post image')
             res.render('posts/createPosts', {
                 errorMessage: 'Missing Post Image',
             }) 
-        } else{
-            removeImagePost(fileName, uploadPath) 
-            res.render('posts/createPosts', {
-                errorMessage: 'error',
-            })
         }
+        removeImagePost(fileName, uploadPath) 
+        res.render('posts/createPosts', {
+            errorMessage: 'error',
+        })
     }
 }
 
@@ -64,11 +61,7 @@ const getPostById = async (req, res) => {
     }) 
     res.render('posts/posts', {
         post: post,
-        upvotesCount: post.upvote,
-        downvotesCount: post.downvote
     }) 
-
-    
 } 
 
 const createComments = async (req, res) => {
@@ -104,76 +97,131 @@ const getPosts = async (req, res) => {
     }
 } 
 
-const upvotePost = async (req, res) => {
-
-    
+const editPost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
-
-        if (!post) {
-            return res.status(404).send('Post not found');
-        }
-        if(!post.upvoteBy) post.upvoteBy=[];
-
-        if (post.upvoteBy.includes(req.session.user)) {
-            console.log('User has already upvoted this post');
-            return res.status(400).send('You have already upvoted this post');
-        }
-
-        post.upvote += 1;
-        post.upvoteBy.push(req.session.user);
-
-        await post.save();
-        console.log('Post upvoted successfully');
-
+        const post = await Post.findById(req.params.id)
+        res.render('posts/edit', { post })
     } catch (error) {
-        console.error('Error upvoting post:', error);
+        console.error(error)
+        res.status(500).send('Internal Server Error')
     }
-    
-    
-
 }
 
-
-const downvotePost = async (req, res) => {
+const updatePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id)
+        if (post.author.equals(req.session.user._id)) {
+            post.title = req.body.title
+            post.postDescription = req.body.postDescription
+            post.game = req.body.game
 
-        if (!post) {
-            return res.status(404).send('Post not found');
+            await post.save()
+            res.redirect('/posts')
+        } else {
+            res.status(403).send('Forbidden')
         }
-        
-       
-        if (!post.downvoteBy) post.downvoteBy = [];
-
-        if (post.downvoteBy.includes(req.session.user)) {
-           console.log('User has already downvoted this post');
-            return res.status(400).send('You have already downvoted this post');
-       }
-
-        
-        post.downvote += 1;
-        post.downvoteBy.push(req.session.user);
-
-        
-        await post.save();
-        console.log('Post downvoted successfully');
-
-   } catch (error) {
-       console.error('Error downvoting post:', error);
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Internal Server Error')
     }
-
-    
-
-    
 }
 
+
+async function getEditCommentPage(req, res) {
+    const commentId = req.params.id
+
+    try {
+        const comment = await Comment.findById(commentId)
+
+        if (!comment) {
+            return res.status(404).send('Comment not found')
+        }
+
+        
+        const post = await Post.findOne({ comments: commentId })
+
+        res.render('comments/editComment', { comment, post })
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error')
+    }
+}
+
+async function updateComment(req, res) {
+    const commentId = req.params.id
+    const updatedCommentDescription = req.body.editedComment
+
+    try {
+        const comment = await Comment.findByIdAndUpdate(commentId, { commentDescription: updatedCommentDescription })
+
+        if (comment) {
+            
+            const post = await Post.findOne({ comments: comment._id })
+
+            if (post) {
+                
+                return res.redirect(`/posts/${post._id}`)
+            } else {
+                
+                return res.status(404).send('Post not found')
+            }
+        } else {
+           
+            return res.status(404).send('Comment not found')
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error')
+    }
+}
+
+async function deleteComment(req, res) {
+    const commentId = req.params.id;
+
+    try {
+        
+        const comment = await Comment.findById(commentId).populate('postId')
+
+        if (!comment) {
+            return res.status(404).send('Comment not found')
+        }
+
+        
+        if (comment.author[0].equals(req.session.user._id)) {
+           
+            const postId = comment.postId._id
+            const post = await Post.findById(postId)
+            
+            if (!post) {
+                return res.status(404).send('Post not found')
+            }
+
+            post.comments.pull(commentId)
+            await post.save()
+
+            
+            await Comment.deleteOne({ _id: commentId })
+
+            console.log('Comment deleted successfully.')
+            return res.redirect(`/posts/${postId}`)
+        } else {
+            console.log('User is not authorized to delete this comment.')
+            return res.status(403).send('Forbidden')
+        }
+    } catch (error) {
+        console.error('Error deleting comment:', error)
+        return res.status(500).send('Internal Server Error')
+    }
+}
 
 module.exports = {
     createPosts,
     getPostById,
     createComments,
     getPosts,
-    upvotePost,
-    downvotePost  
+    editPost,
+    updatePost,
+    getEditCommentPage,
+    updateComment,
+    deleteComment,
 } 
